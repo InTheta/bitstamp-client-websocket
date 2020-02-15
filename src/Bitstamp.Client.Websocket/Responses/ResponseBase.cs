@@ -25,16 +25,10 @@ namespace Bitstamp.Client.Websocket.Responses
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null)
-            {
-                return null;
-            }
+            if (reader.TokenType == JsonToken.Null) return null;
 
             var value = serializer.Deserialize<string>(reader);
-            if (long.TryParse(value, out long l))
-            {
-                return l;
-            }
+            if (long.TryParse(value, out var l)) return l;
 
             throw new Exception("Cannot unmarshal type long");
         }
@@ -47,7 +41,7 @@ namespace Bitstamp.Client.Websocket.Responses
                 return;
             }
 
-            var value = (long)untypedValue;
+            var value = (long) untypedValue;
             serializer.Serialize(writer, value.ToString());
         }
     }

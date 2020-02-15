@@ -8,10 +8,7 @@ namespace Bitstamp.Client.Websocket.Responses
     {
         internal static bool TryHandle(JObject response, ISubject<SubscriptionSucceeded> subject)
         {
-            if (response?["event"].Value<string>() != "bts:subscription_succeeded")
-            {
-                return false;
-            }
+            if (response?["event"].Value<string>() != "bts:subscription_succeeded") return false;
 
             var parsed = response.ToObject<SubscriptionSucceeded>(BitstampJsonSerializer.Serializer);
 

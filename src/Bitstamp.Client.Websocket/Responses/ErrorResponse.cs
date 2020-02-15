@@ -18,10 +18,7 @@ namespace Bitstamp.Client.Websocket.Responses
 
         internal static bool TryHandle(JObject response, ISubject<ErrorResponse> subject)
         {
-            if (response?["event"].Value<string>() != "bts:error")
-            {
-                return false;
-            }
+            if (response?["event"].Value<string>() != "bts:error") return false;
 
             var parsed = response.ToObject<ErrorResponse>(BitstampJsonSerializer.Serializer);
             subject.OnNext(parsed);

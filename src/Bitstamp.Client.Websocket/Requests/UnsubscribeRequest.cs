@@ -27,7 +27,7 @@ namespace Bitstamp.Client.Websocket.Requests
         public override string Event => "bts:unsubscribe";
 
         /// <inheritdoc />
-        public override RequestData RequestData => new RequestData { Channel = AddSymbolToChannel() };
+        public override RequestData RequestData => new RequestData {Channel = AddSymbolToChannel()};
 
         private string AddSymbolToChannel()
         {

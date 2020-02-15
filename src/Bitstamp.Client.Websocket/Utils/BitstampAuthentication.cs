@@ -26,10 +26,7 @@ namespace Bitstamp.Client.Websocket.Utils
             {
                 var builder = new StringBuilder();
 
-                for (var i = 0; i < buff.Length; i++)
-                {
-                    builder.Append(buff[i].ToString("X2")); // hex format
-                }
+                for (var i = 0; i < buff.Length; i++) builder.Append(buff[i].ToString("X2")); // hex format
 
                 return builder.ToString();
             }

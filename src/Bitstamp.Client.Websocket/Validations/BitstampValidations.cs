@@ -28,9 +28,7 @@ namespace Bitstamp.Client.Websocket.Validations
         public static void ValidateInput<T>(T value, string name)
         {
             if (Equals(value, default(T)))
-            {
                 throw new BitstampBadInputException($"Input parameter '{name}' is null. Please correct it.");
-            }
         }
 
         /// <summary>
@@ -45,9 +43,7 @@ namespace Bitstamp.Client.Websocket.Validations
 
             // ReSharper disable once PossibleMultipleEnumeration
             if (!collection.Any())
-            {
                 throw new BitstampBadInputException($"Input collection '{name}' is empty. Please correct it.");
-            }
         }
 
         /// <summary>

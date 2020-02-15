@@ -83,17 +83,11 @@ namespace Bitstamp.Client.Websocket.Client
                 if (messageSafe.StartsWith("{"))
                 {
                     handled = HandleObjectMessage(messageSafe);
-                    if (handled)
-                    {
-                        return;
-                    }
+                    if (handled) return;
                 }
 
                 handled = HandleRawMessage(messageSafe);
-                if (handled)
-                {
-                    return;
-                }
+                if (handled) return;
 
                 Log.Warn(L($"Unhandled response:  '{messageSafe}'"));
             }

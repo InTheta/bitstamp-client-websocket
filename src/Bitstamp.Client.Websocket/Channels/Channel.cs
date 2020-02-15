@@ -6,6 +6,7 @@
         ///     Ticker
         /// </summary>
         Heartbeat,
+
         /// <summary>
         ///     Ticker
         /// </summary>

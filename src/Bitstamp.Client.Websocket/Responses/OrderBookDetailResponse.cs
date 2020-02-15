@@ -42,7 +42,8 @@ namespace Bitstamp.Client.Websocket.Responses
 
         internal static bool TryHandle(JObject response, ISubject<OrderBookDetailResponse> subject)
         {
-            if (response != null && (bool) !response?["channel"].Value<string>().StartsWith("detail_order_book")) return false;
+            if (response != null && (bool) !response?["channel"].Value<string>().StartsWith("detail_order_book"))
+                return false;
 
             var parsed = response?.ToObject<OrderBookDetailResponse>(BitstampJsonSerializer.Serializer);
 
@@ -66,7 +67,8 @@ namespace Bitstamp.Client.Websocket.Responses
 
     internal class OrderBookDetailResponseTimeConverter : JsonConverter
     {
-        public static readonly OrderBookDetailResponseTimeConverter Singleton = new OrderBookDetailResponseTimeConverter();
+        public static readonly OrderBookDetailResponseTimeConverter Singleton =
+            new OrderBookDetailResponseTimeConverter();
 
         public override bool CanConvert(Type t)
         {

@@ -16,7 +16,8 @@ namespace Bitstamp.Client.Websocket.Client
         //internal readonly Subject<InfoResponse> InfoSubject = new Subject<InfoResponse>();
         internal readonly Subject<HeartbeatResponse> HeartbeatSubject = new Subject<HeartbeatResponse>();
 
-        internal readonly Subject<OrderBookDetailResponse> OrderBookDetailSubject = new Subject<OrderBookDetailResponse>();
+        internal readonly Subject<OrderBookDetailResponse> OrderBookDetailSubject =
+            new Subject<OrderBookDetailResponse>();
 
         internal readonly Subject<OrderBookFullResponse> OrderBookFullSubject = new Subject<OrderBookFullResponse>();
 

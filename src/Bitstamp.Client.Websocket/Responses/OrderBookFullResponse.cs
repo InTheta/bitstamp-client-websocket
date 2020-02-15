@@ -18,13 +18,13 @@ namespace Bitstamp.Client.Websocket.Responses
 {
     public class OrderBookFullResponse : ResponseBase<OrderBookFullResponse>
     {
-
         [JsonProperty("timestamp", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(OrderBookFullTimeConverter))]
         public long? Timestamp { get; set; }
 
         [JsonProperty("microtimestamp", NullValueHandling = NullValueHandling.Ignore)]
         public string Microtimestamp { get; set; }
+
         /// <summary>
         ///     Order book bid levels
         /// </summary>
@@ -39,7 +39,8 @@ namespace Bitstamp.Client.Websocket.Responses
 
         internal static bool TryHandle(JObject response, ISubject<OrderBookFullResponse> subject)
         {
-            if (response != null && (bool) !response?["channel"].Value<string>().StartsWith("diff_order_book")) return false;
+            if (response != null && (bool) !response?["channel"].Value<string>().StartsWith("diff_order_book"))
+                return false;
 
             var parsed = response?.ToObject<OrderBookFullResponse>(BitstampJsonSerializer.Serializer);
 

@@ -50,8 +50,8 @@ namespace Bitstamp.Client.Websocket.Responses.Books
                 if (array.Length == 2)
                 {
                     level.Side = _side;
-                    level.Price = (double)array[0];
-                    level.Amount = (double)array[1];
+                    level.Price = (double) array[0];
+                    level.Amount = (double) array[1];
                 }
                 else
                 {
@@ -59,9 +59,9 @@ namespace Bitstamp.Client.Websocket.Responses.Books
                     //level.Side = string.IsNullOrWhiteSpace(side) ? OrderBookSide.Undefined :
                     //side == "buy" ? OrderBookSide.Buy : OrderBookSide.Sell;
                     level.Side = _side;
-                    level.Price = (double)array[0];
-                    level.Amount = (double)array[1];
-                    level.Mts = (long)array[2];
+                    level.Price = (double) array[0];
+                    level.Amount = (double) array[1];
+                    level.Mts = (long) array[2];
                 }
 
                 result.Add(level);

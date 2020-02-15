@@ -27,6 +27,7 @@ namespace Bitstamp.Client.Websocket.Responses
 
         [JsonProperty("microtimestamp", NullValueHandling = NullValueHandling.Ignore)]
         public string Microtimestamp { get; set; }
+
         /// <summary>
         ///     Order book bid levels
         /// </summary>

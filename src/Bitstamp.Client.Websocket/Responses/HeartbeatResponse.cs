@@ -11,10 +11,7 @@ namespace Bitstamp.Client.Websocket.Responses
     {
         internal static bool TryHandle(JObject response, ISubject<HeartbeatResponse> subject)
         {
-            if (response?["channel"].Value<string>() != "heartbeat")
-            {
-                return false;
-            }
+            if (response?["channel"].Value<string>() != "heartbeat") return false;
 
             var parsed = response.ToObject<HeartbeatResponse>(BitstampJsonSerializer.Serializer);
             subject.OnNext(parsed);
