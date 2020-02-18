@@ -7,7 +7,6 @@
 //    var orderBook = OrderBook.FromJson(jsonString);
 
 using System;
-using System.Collections.Generic;
 using System.Reactive.Subjects;
 using Bitstamp.Client.Websocket.Json;
 using Bitstamp.Client.Websocket.Responses.Books;
@@ -29,13 +28,13 @@ namespace Bitstamp.Client.Websocket.Responses
         public string Microtimestamp { get; set; }
 
         /// <summary>
-        ///     Order book bid levels
+        /// Order book bid levels
         /// </summary>
         [JsonConverter(typeof(OrderBookLevelConverter), OrderBookSide.Buy)]
         public OrderBookLevel[] Bids { get; set; }
 
         /// <summary>
-        ///     Order book ask levels
+        /// Order book ask levels
         /// </summary>
         [JsonConverter(typeof(OrderBookLevelConverter), OrderBookSide.Sell)]
         public OrderBookLevel[] Asks { get; set; }

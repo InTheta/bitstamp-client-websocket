@@ -1,12 +1,12 @@
-﻿using Bitstamp.Client.Websocket.Logging;
+﻿using System;
+using Bitstamp.Client.Websocket.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
 
 namespace Bitstamp.Client.Websocket.Json
 {
     /// <summary>
-    ///     Extended StringEnumConverter to use first value ('Unknown') as default and log unexpected type
+    /// Extended StringEnumConverter to use first value ('Unknown') as default and log unexpected type
     /// </summary>
     public class BitstampStringEnumConverter : StringEnumConverter
     {

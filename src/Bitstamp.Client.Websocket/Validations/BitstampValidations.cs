@@ -1,13 +1,13 @@
-﻿using Bitstamp.Client.Websocket.Exceptions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Bitstamp.Client.Websocket.Exceptions;
 
 namespace Bitstamp.Client.Websocket.Validations
 {
     internal static class BitstampValidations
     {
         /// <summary>
-        ///     It throws <exception cref="BitstampBadInputException"></exception> if value is null or empty/white spaces
+        /// It throws <exception cref="BitstampBadInputException"></exception> if value is null or empty/white spaces
         /// </summary>
         /// <param name="value">The value to be validated</param>
         /// <param name="name">Input parameter name</param>
@@ -21,7 +21,7 @@ namespace Bitstamp.Client.Websocket.Validations
         }
 
         /// <summary>
-        ///     It throws <exception cref="BitstampBadInputException"></exception> if value is null
+        /// It throws <exception cref="BitstampBadInputException"></exception> if value is null
         /// </summary>
         /// <param name="value">The value to be validated</param>
         /// <param name="name">Input parameter name</param>
@@ -32,7 +32,7 @@ namespace Bitstamp.Client.Websocket.Validations
         }
 
         /// <summary>
-        ///     It throws <exception cref="BitstampBadInputException"></exception> if collection is null or collection is empty
+        /// It throws <exception cref="BitstampBadInputException"></exception> if collection is null or collection is empty
         /// </summary>
         /// <param name="collection">The collection to be validated</param>
         /// <param name="name">Input parameter name</param>
@@ -47,7 +47,7 @@ namespace Bitstamp.Client.Websocket.Validations
         }
 
         /// <summary>
-        ///     It throws <exception cref="BitstampBadInputException"></exception> if value is not in specified range
+        /// It throws <exception cref="BitstampBadInputException"></exception> if value is not in specified range
         /// </summary>
         /// <param name="value">The value to be validated</param>
         /// <param name="name">Input parameter name</param>
@@ -70,7 +70,7 @@ namespace Bitstamp.Client.Websocket.Validations
         }
 
         /// <summary>
-        ///     It throws <exception cref="BitstampBadInputException"></exception> if value is not in specified range
+        /// It throws <exception cref="BitstampBadInputException"></exception> if value is not in specified range
         /// </summary>
         /// <param name="value">The value to be validated</param>
         /// <param name="name">Input parameter name</param>
@@ -93,7 +93,7 @@ namespace Bitstamp.Client.Websocket.Validations
         }
 
         /// <summary>
-        ///     It throws <exception cref="BitstampBadInputException"></exception> if value is not in specified range
+        /// It throws <exception cref="BitstampBadInputException"></exception> if value is not in specified range
         /// </summary>
         /// <param name="value">The value to be validated</param>
         /// <param name="name">Input parameter name</param>

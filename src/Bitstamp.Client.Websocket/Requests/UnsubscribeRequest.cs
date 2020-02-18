@@ -4,7 +4,7 @@ using Bitstamp.Client.Websocket.Utils;
 namespace Bitstamp.Client.Websocket.Requests
 {
     /// <summary>
-    ///     Subscribe request
+    /// Subscribe request
     /// </summary>
     public class UnsubscribeRequest : RequestBase
     {

@@ -1,8 +1,8 @@
-﻿using Bitstamp.Client.Websocket.Utils;
+﻿using System;
+using System.Globalization;
+using Bitstamp.Client.Websocket.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
-using System.Globalization;
 
 namespace Bitstamp.Client.Websocket.Json
 {

@@ -3,7 +3,7 @@
 namespace Bitstamp.Client.Websocket.Exceptions
 {
     /// <summary>
-    ///     Base Bitstamp exception
+    /// Base Bitstamp exception
     /// </summary>
     public class BitstampException : Exception
     {

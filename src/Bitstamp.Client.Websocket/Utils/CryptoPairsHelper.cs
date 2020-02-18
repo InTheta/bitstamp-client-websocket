@@ -4,12 +4,12 @@ using System.Linq;
 namespace Bitstamp.Client.Websocket.Utils
 {
     /// <summary>
-    ///     Helper class for working with pair identifications
+    /// Helper class for working with pair identifications
     /// </summary>
     public static class CryptoPairsHelper
     {
         /// <summary>
-        ///     Clean pair from any unnecessary characters and make lowercase
+        /// Clean pair from any unnecessary characters and make lowercase
         /// </summary>
         public static string Clean(string pair)
         {
@@ -22,7 +22,7 @@ namespace Bitstamp.Client.Websocket.Utils
         }
 
         /// <summary>
-        ///     Compare two pairs, clean them before
+        /// Compare two pairs, clean them before
         /// </summary>
         public static bool AreSame(string firstPair, string secondPair)
         {

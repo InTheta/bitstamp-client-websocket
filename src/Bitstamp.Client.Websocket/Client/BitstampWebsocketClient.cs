@@ -1,20 +1,20 @@
-﻿using Bitstamp.Client.Websocket.Communicator;
+﻿using System;
+using System.Threading.Tasks;
+using Bitstamp.Client.Websocket.Communicator;
 using Bitstamp.Client.Websocket.Json;
 using Bitstamp.Client.Websocket.Logging;
 using Bitstamp.Client.Websocket.Requests;
 using Bitstamp.Client.Websocket.Responses;
 using Bitstamp.Client.Websocket.Validations;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Threading.Tasks;
 using Websocket.Client;
 
 namespace Bitstamp.Client.Websocket.Client
 {
     /// <summary>
-    ///     Bitstamp websocket client.
-    ///     Use method `Send()` to subscribe to channels.
-    ///     And `Streams` to subscribe.
+    /// Bitstamp websocket client.
+    /// Use method `Send()` to subscribe to channels.
+    /// And `Streams` to subscribe.
     /// </summary>
     public class BitstampWebsocketClient : IDisposable
     {
@@ -33,12 +33,12 @@ namespace Bitstamp.Client.Websocket.Client
         }
 
         /// <summary>
-        ///     Provided message streams
+        /// Provided message streams
         /// </summary>
         public BitstampClientStreams Streams { get; } = new BitstampClientStreams();
 
         /// <summary>
-        ///     Cleanup everything
+        /// Cleanup everything
         /// </summary>
         public void Dispose()
         {
@@ -46,8 +46,8 @@ namespace Bitstamp.Client.Websocket.Client
         }
 
         /// <summary>
-        ///     Serializes request and sends message via websocket communicator.
-        ///     It logs and re-throws every exception.
+        /// Serializes request and sends message via websocket communicator.
+        /// It logs and re-throws every exception.
         /// </summary>
         /// <param name="request">Request/message to be sent</param>
         public async Task Send<T>(T request) where T : RequestBase

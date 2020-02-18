@@ -1,6 +1,6 @@
-﻿using Bitstamp.Client.Websocket.Json;
+﻿using System.Reactive.Subjects;
+using Bitstamp.Client.Websocket.Json;
 using Newtonsoft.Json.Linq;
-using System.Reactive.Subjects;
 
 namespace Bitstamp.Client.Websocket.Responses
 {

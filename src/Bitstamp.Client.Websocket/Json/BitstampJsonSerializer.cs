@@ -1,18 +1,18 @@
-﻿using Bitstamp.Client.Websocket.Responses;
+﻿using System.Globalization;
+using Bitstamp.Client.Websocket.Responses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using System.Globalization;
 
 namespace Bitstamp.Client.Websocket.Json
 {
     /// <summary>
-    ///     Helper class for JSON serialization
+    /// Helper class for JSON serialization
     /// </summary>
     public static class BitstampJsonSerializer
     {
         /// <summary>
-        ///     Custom JSON settings
+        /// Custom JSON settings
         /// </summary>
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
@@ -42,12 +42,12 @@ namespace Bitstamp.Client.Websocket.Json
         };
 
         /// <summary>
-        ///     Custom preconfigured JSON serializer
+        /// Custom preconfigured JSON serializer
         /// </summary>
         public static readonly JsonSerializer Serializer = JsonSerializer.Create(Settings);
 
         /// <summary>
-        ///     Deserialize JSON string data by our configuration
+        /// Deserialize JSON string data by our configuration
         /// </summary>
         public static T Deserialize<T>(string data)
         {
@@ -55,7 +55,7 @@ namespace Bitstamp.Client.Websocket.Json
         }
 
         /// <summary>
-        ///     Serialize object into JSON by our configuration
+        /// Serialize object into JSON by our configuration
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>

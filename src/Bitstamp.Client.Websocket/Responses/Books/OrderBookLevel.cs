@@ -1,7 +1,7 @@
 ﻿namespace Bitstamp.Client.Websocket.Responses.Books
 {
     /// <summary>
-    ///     One order book level
+    /// One order book level
     /// </summary>
     public class OrderBookLevel
     {

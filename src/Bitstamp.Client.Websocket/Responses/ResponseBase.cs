@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Bitstamp.Client.Websocket.Responses
 {
     /// <summary>
-    ///     Message which is used as base for every request and response
+    /// Message which is used as base for every request and response
     /// </summary>
     public abstract class ResponseBase<T> where T : new()
     {

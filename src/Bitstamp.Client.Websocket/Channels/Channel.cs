@@ -3,32 +3,32 @@
     public enum Channel
     {
         /// <summary>
-        ///     Ticker
+        /// Ticker
         /// </summary>
         Heartbeat,
 
         /// <summary>
-        ///     Ticker
+        /// Ticker
         /// </summary>
         Ticker,
 
         /// <summary>
-        ///     Orders
+        /// Orders
         /// </summary>
         Orders,
 
         /// <summary>
-        ///     OrderBook
+        /// OrderBook
         /// </summary>
         OrderBook,
 
         /// <summary>
-        ///     OrderBookDetail
+        /// OrderBookDetail
         /// </summary>
         OrderBookDetail,
 
         /// <summary>
-        ///     OrderBookFull
+        /// OrderBookFull
         /// </summary>
         OrderBookFull
     }
