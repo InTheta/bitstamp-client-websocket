@@ -9,58 +9,37 @@
 using System;
 using System.Reactive.Subjects;
 using Bitstamp.Client.Websocket.Json;
-using Bitstamp.Client.Websocket.Responses.Books;
+using Bitstamp.Client.Websocket.Messages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Bitstamp.Client.Websocket.Responses
+namespace Bitstamp.Client.Websocket.Responses.Books
 {
-    public class OrderBookFullResponse : ResponseBase<OrderBookFullResponse>
+    public class OrderBookDiffResponse : ResponseBase
     {
-        [JsonProperty("timestamp", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(OrderBookFullTimeConverter))]
-        public long? Timestamp { get; set; }
+        public override MessageType Event => MessageType.OrderBookDiff;
+        public OrderBookDiff Data { get; set; }
 
-        [JsonProperty("microtimestamp", NullValueHandling = NullValueHandling.Ignore)]
-        public string Microtimestamp { get; set; }
-
-        /// <summary>
-        /// Order book bid levels
-        /// </summary>
-        [JsonConverter(typeof(OrderBookLevelConverter), OrderBookSide.Buy)]
-        public OrderBookLevel[] Bids { get; set; }
-
-        /// <summary>
-        /// Order book ask levels
-        /// </summary>
-        [JsonConverter(typeof(OrderBookLevelConverter), OrderBookSide.Sell)]
-        public OrderBookLevel[] Asks { get; set; }
-
-        internal static bool TryHandle(JObject response, ISubject<OrderBookFullResponse> subject)
+        internal static bool TryHandle(JObject response, ISubject<OrderBookDiffResponse> subject)
         {
             if (response != null && (bool) !response?["channel"].Value<string>().StartsWith("diff_order_book"))
                 return false;
 
-            var parsed = response?.ToObject<OrderBookFullResponse>(BitstampJsonSerializer.Serializer);
+            var parsed = response?.ToObject<OrderBookDiffResponse>(BitstampJsonSerializer.Serializer);
 
             if (parsed != null)
             {
                 var index = 3;
                 var channel = response?["channel"].Value<string>();
-
                 parsed.Symbol = response?["channel"].Value<string>().Split('_')[index];
-
-                parsed.Data.Symbol = parsed.Symbol;
-                parsed.Data.Channel = parsed.Channel;
-                parsed.Data.Event = parsed.Event;
-
-                subject.OnNext(parsed.Data);
+                subject.OnNext(parsed);
             }
 
             return true;
         }
     }
 
+    /*
     internal class OrderBookFullTimeConverter : JsonConverter
     {
         public static readonly OrderBookFullTimeConverter Singleton = new OrderBookFullTimeConverter();
@@ -90,5 +69,5 @@ namespace Bitstamp.Client.Websocket.Responses
             var value = (long) untypedValue;
             serializer.Serialize(writer, value.ToString());
         }
-    }
+    }*/
 }

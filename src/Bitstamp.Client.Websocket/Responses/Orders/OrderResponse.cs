@@ -6,39 +6,20 @@
 //
 //    var liveOrders = Orders.FromJson(jsonString);
 
-using System;
 using System.Reactive.Subjects;
 using Bitstamp.Client.Websocket.Json;
-using Newtonsoft.Json;
+using Bitstamp.Client.Websocket.Messages;
 using Newtonsoft.Json.Linq;
 
-namespace Bitstamp.Client.Websocket.Responses
+namespace Bitstamp.Client.Websocket.Responses.Orders
 {
-    public class OrderResponse : ResponseBase<OrderResponse>
+    public class OrderResponse : ResponseBase
     {
-        // TODO
-        //public override Event Event => Event.Order;
-        //public override Channel Channel => Channel.Orders;
+        public override MessageType Event => MessageType.Order;
+        public Order Data { get; set; }
 
-        [JsonProperty("microtimestamp")] public string MicroTimeStamp { get; set; }
-
-        [JsonProperty("amount")] public double Amount { get; set; }
-
-        [JsonProperty("order_type")] public long OrderType { get; set; }
-
-        [JsonProperty("amount_str")] public string AmountStr { get; set; }
-
-        [JsonProperty("price_str")] public string PriceStr { get; set; }
-
-        [JsonProperty("price")] public double Price { get; set; }
-
-        [JsonProperty("id")] public long Id { get; set; }
-
-        [JsonProperty("datetime")]
-        [JsonConverter(typeof(LiveOrdersStringConverter))]
-        public long Datetime { get; set; }
-
-        internal static bool TryHandle(JObject response, ISubject<OrderResponse> subject)
+        internal static bool
+            TryHandle(JObject response, ISubject<OrderResponse> subject)
         {
             //if (response?["channel"].Value<string>() != "order_created" ||
             //response?["channel"].Value<string>() != "order_changed" ||
@@ -59,8 +40,9 @@ namespace Bitstamp.Client.Websocket.Responses
             return true;
         }
     }
+}
 
-
+/*
     internal class LiveOrdersStringConverter : JsonConverter
     {
         public static readonly LiveOrdersStringConverter Singleton = new LiveOrdersStringConverter();
@@ -91,4 +73,4 @@ namespace Bitstamp.Client.Websocket.Responses
             serializer.Serialize(writer, value.ToString());
         }
     }
-}
+}*/

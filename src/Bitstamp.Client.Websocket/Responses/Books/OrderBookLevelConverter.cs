@@ -38,14 +38,14 @@ namespace Bitstamp.Client.Websocket.Responses.Books
             throw new NotImplementedException();
         }
 
-        private OrderBookLevel[] JArrayToTradingTicker(JArray data)
+        private BookLevel[] JArrayToTradingTicker(JArray data)
         {
-            var result = new List<OrderBookLevel>();
+            var result = new List<BookLevel>();
             foreach (var item in data)
             {
                 var array = item.ToArray();
 
-                var level = new OrderBookLevel();
+                var level = new BookLevel();
 
                 if (array.Length == 2)
                 {

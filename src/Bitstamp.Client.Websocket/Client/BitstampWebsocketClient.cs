@@ -5,6 +5,8 @@ using Bitstamp.Client.Websocket.Json;
 using Bitstamp.Client.Websocket.Logging;
 using Bitstamp.Client.Websocket.Requests;
 using Bitstamp.Client.Websocket.Responses;
+using Bitstamp.Client.Websocket.Responses.Books;
+using Bitstamp.Client.Websocket.Responses.Orders;
 using Bitstamp.Client.Websocket.Validations;
 using Newtonsoft.Json.Linq;
 using Websocket.Client;
@@ -50,7 +52,7 @@ namespace Bitstamp.Client.Websocket.Client
         /// It logs and re-throws every exception.
         /// </summary>
         /// <param name="request">Request/message to be sent</param>
-        public async Task Send<T>(T request) where T : RequestBase
+        public void Send<T>(T request) where T : RequestBase
         {
             try
             {
@@ -116,10 +118,12 @@ namespace Bitstamp.Client.Websocket.Client
 
             return
                 SubscriptionSucceeded.TryHandle(response, Streams.SubscriptionSucceededSubject) ||
+                UnsubscriptionSucceeded.TryHandle(response, Streams.UnsubscriptionSucceededSubject) ||
+                //OrderBookSnapshotResponse.TryHandle(response, Streams.OrderBookSnapshotSubject) ||
                 Ticker.TryHandle(response, Streams.TickerSubject) ||
                 OrderBookResponse.TryHandle(response, Streams.OrderBookSubject) ||
                 OrderBookDetailResponse.TryHandle(response, Streams.OrderBookDetailSubject) ||
-                OrderBookFullResponse.TryHandle(response, Streams.OrderBookFullSubject) ||
+                OrderBookDiffResponse.TryHandle(response, Streams.OrderBookDiffSubject) ||
                 ErrorResponse.TryHandle(response, Streams.ErrorSubject) ||
                 OrderResponse.TryHandle(response, Streams.OrdersSubject) ||
                 false;

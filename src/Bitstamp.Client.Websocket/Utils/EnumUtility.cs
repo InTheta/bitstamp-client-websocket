@@ -34,8 +34,10 @@ namespace Bitstamp.Client.Websocket.Utils
                         .FirstOrDefault();
 
                 if (stringValueAttribute != null)
+                {
                     if (stringValueAttribute.Value == expected)
                         return (T) fieldInfo.GetValue(t);
+                }
             }
 
             return default;

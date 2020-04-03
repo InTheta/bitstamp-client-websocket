@@ -48,7 +48,7 @@ namespace Bitstamp.Client.Websocket.Requests
                     return "order_book";
                 case Channel.OrderBookDetail:
                     return "detail_order_book";
-                case Channel.OrderBookFull:
+                case Channel.OrderBookDiff:
                     return "diff_order_book";
             }
 

@@ -3,7 +3,7 @@
     public enum Channel
     {
         /// <summary>
-        /// Ticker
+        /// Heartbeat
         /// </summary>
         Heartbeat,
 
@@ -28,8 +28,8 @@
         OrderBookDetail,
 
         /// <summary>
-        /// OrderBookFull
+        /// OrderBookDiff
         /// </summary>
-        OrderBookFull
+        OrderBookDiff
     }
 }

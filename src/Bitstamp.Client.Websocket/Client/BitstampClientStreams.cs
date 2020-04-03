@@ -2,6 +2,8 @@
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Bitstamp.Client.Websocket.Responses;
+using Bitstamp.Client.Websocket.Responses.Books;
+using Bitstamp.Client.Websocket.Responses.Orders;
 
 namespace Bitstamp.Client.Websocket.Client
 {
@@ -19,14 +21,20 @@ namespace Bitstamp.Client.Websocket.Client
         internal readonly Subject<OrderBookDetailResponse> OrderBookDetailSubject =
             new Subject<OrderBookDetailResponse>();
 
-        internal readonly Subject<OrderBookFullResponse> OrderBookFullSubject = new Subject<OrderBookFullResponse>();
+        internal readonly Subject<OrderBookDiffResponse> OrderBookDiffSubject = new Subject<OrderBookDiffResponse>();
 
         internal readonly Subject<OrderBookResponse> OrderBookSubject = new Subject<OrderBookResponse>();
+
+        internal readonly Subject<OrderBookSnapshotResponse> OrderBookSnapshotSubject =
+            new Subject<OrderBookSnapshotResponse>();
 
         internal readonly Subject<OrderResponse> OrdersSubject = new Subject<OrderResponse>();
 
         internal readonly Subject<SubscriptionSucceeded> SubscriptionSucceededSubject =
             new Subject<SubscriptionSucceeded>();
+
+        internal readonly Subject<UnsubscriptionSucceeded> UnsubscriptionSucceededSubject =
+            new Subject<UnsubscriptionSucceeded>();
 
         internal readonly Subject<Ticker> TickerSubject = new Subject<Ticker>();
 
@@ -51,15 +59,20 @@ namespace Bitstamp.Client.Websocket.Client
 
         public IObservable<Ticker> TickerStream => TickerSubject.AsObservable();
 
+        public IObservable<OrderBookSnapshotResponse> OrderBookSnapshotStream =>
+            OrderBookSnapshotSubject.AsObservable();
+
         public IObservable<OrderBookResponse> OrderBookStream => OrderBookSubject.AsObservable();
 
         public IObservable<OrderBookDetailResponse> OrderBookDetailStream => OrderBookDetailSubject.AsObservable();
 
-        public IObservable<OrderBookFullResponse> OrderBookFullStream => OrderBookFullSubject.AsObservable();
+        public IObservable<OrderBookDiffResponse> OrderBookDiffStream => OrderBookDiffSubject.AsObservable();
 
         public IObservable<SubscriptionSucceeded> SubscriptionSucceededStream =>
             SubscriptionSucceededSubject.AsObservable();
 
+        public IObservable<UnsubscriptionSucceeded> UnsubscriptionSucceededStream =>
+            UnsubscriptionSucceededSubject.AsObservable();
 
         // PRIVATE
     }

@@ -25,7 +25,7 @@ namespace Bitstamp.Client.Websocket.Tests.Integration
 
                 await communicator.Start();
 
-                communicator.Send("invalid test request").Wait();
+                communicator.Send("invalid test request");
 
                 receivedEvent.WaitOne(TimeSpan.FromSeconds(30));
 

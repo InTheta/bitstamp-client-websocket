@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Bitstamp.Client.Websocket.Responses;
+using Bitstamp.Client.Websocket.Responses.Books;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -28,15 +29,7 @@ namespace Bitstamp.Client.Websocket.Json
             },
             Converters =
             {
-                //new BitstampStringEnumConverter {},
-                //NamingStrategy = new CamelCaseNamingStrategy(),
-                LiveOrdersStringConverter.Singleton,
-                //OrderBookParseStringConverter.Singleton,
-                //BookDetailParseStringConverter.Singleton,
                 LiveTickerParseStringConverter.Singleton,
-                OrderBookParseTimeConverter.Singleton,
-                OrderBookDetailResponseTimeConverter.Singleton,
-                OrderBookFullTimeConverter.Singleton,
                 new IsoDateTimeConverter {DateTimeStyles = DateTimeStyles.AssumeUniversal}
             }
         };

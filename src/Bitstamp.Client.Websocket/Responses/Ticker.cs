@@ -16,7 +16,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Bitstamp.Client.Websocket.Responses
 {
-    public partial class Ticker : ResponseBase<Ticker>
+    public partial class Ticker : ResponseBase
     {
         [JsonProperty("microtimestamp")] public string Microtimestamp { get; set; }
 

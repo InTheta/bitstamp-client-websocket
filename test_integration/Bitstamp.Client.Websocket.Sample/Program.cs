@@ -21,7 +21,7 @@ namespace Bitstamp.Client.Websocket.Sample
         private static readonly string API_KEY = "your api key";
         private static readonly string API_SECRET = "";
 
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             InitLogging();
 
@@ -55,7 +55,7 @@ namespace Bitstamp.Client.Websocket.Sample
                         await SendSubscriptionRequests(client);
                     });
 
-                    communicator.Start().Wait();
+                    await communicator.Start();
 
                     ExitEvent.WaitOne();
                 }
@@ -72,33 +72,42 @@ namespace Bitstamp.Client.Websocket.Sample
             var orderBook = new SubscribeRequest("btcusd", Channel.OrderBook);
             //var orderBook = new SubscribeRequest("btcusd", ChannelType.Book);
             var orderBookDetail = new SubscribeRequest("btcusd", Channel.OrderBookDetail);
+            
 
-            var orderBookFull = new SubscribeRequest("btcusd", Channel.OrderBookFull);
+            var orderBookFull = new SubscribeRequest("btcusd", Channel.OrderBookDiff);
 
             var heartbeat = new SubscribeRequest("btcusd", Channel.Heartbeat);
 
-            await client.Send(orderBook);
-            await client.Send(orderBookDetail);
-            await client.Send(orderBookFull);
+             client.Send(orderBook).Wait();
+             client.Send(orderBookDetail).Wait();
+             
+             client.Send(orderBookFull).Wait();
         }
 
         private static void SubscribeToStreams(BitstampWebsocketClient client)
         {
             client.Streams.ErrorStream.Subscribe(x =>
-                Log.Warning($"Error received, message: {x?.Data?.Message}"));
+                Log.Warning($"Error received, message: {x?.Message}"));
 
             client.Streams.SubscriptionSucceededStream.Subscribe(x =>
             {
                 Log.Information($"SUCESS!");
-                Log.Information($"{x?.Symbol} {x?.Data?.Channel} {x?.Data?.Data}");
+                Log.Information($"{x?.Symbol} {x?.Channel} {x}");
+            });
+            
+            client.Streams.UnsubscriptionSucceededStream.Subscribe(x =>
+            {
+                Log.Information($"Unsubscribed!");
+                Log.Information($"{x?.Symbol} {x?.Channel} {x}");
             });
 
+            /*
             client.Streams.OrderBookStream.Subscribe(x =>
             {
                 Log.Information($"Order book");
-                Log.Information($"{x.Symbol} {x.Data?.Channel} {x.Data?.Asks.FirstOrDefault()?.Price} {x.Data?.Asks.FirstOrDefault()?.Amount??0} {x.Data?.Asks.FirstOrDefault()?.Side}");
-                Log.Information($"{x.Symbol} {x.Data?.Channel} {x.Data?.Bids.FirstOrDefault()?.Price} {x.Data?.Bids.FirstOrDefault()?.Amount ?? 0} {x.Data?.Bids.FirstOrDefault()?.Side}");
-            });
+                Log.Information($"{x.Symbol} {x.Channel} {x.Data?.Asks.FirstOrDefault()?.Price} {x.Data?.Asks.FirstOrDefault()?.Amount??0} {x.Data?.Asks.FirstOrDefault()?.Side}");
+                Log.Information($"{x.Symbol} {x.Channel} {x.Data?.Bids.FirstOrDefault()?.Price} {x.Data?.Bids.FirstOrDefault()?.Amount ?? 0} {x.Data?.Bids.FirstOrDefault()?.Side}");
+            });*/
 
             client.Streams.OrdersStream.Subscribe(x =>
             {
@@ -108,16 +117,19 @@ namespace Bitstamp.Client.Websocket.Sample
 
             client.Streams.OrderBookDetailStream.Subscribe(x =>
             {
-                Log.Information($"Order book detail");
-                Log.Information($"{x.Symbol} {x.Data?.Channel} {x.Data?.Asks.FirstOrDefault()?.Price} {x.Data?.Asks.FirstOrDefault()?.Amount ?? 0} {x.Data?.Asks.FirstOrDefault()?.Side}");
-                Log.Information($"{x.Symbol} {x.Data?.Channel} {x.Data?.Bids.FirstOrDefault()?.Price} {x.Data?.Bids.FirstOrDefault()?.Amount ?? 0} {x.Data?.Bids.FirstOrDefault()?.Side}");
+                Log.Information($"Order book detail snapshot");
+                Log.Information($"{x.Symbol} {x.Channel} {x.Data?.Asks.FirstOrDefault()?.Price} {x.Data?.Asks.FirstOrDefault()?.Amount ?? 0} {x.Data?.Asks.FirstOrDefault()?.Side}");
+                Log.Information($"{x.Symbol} {x.Channel} {x.Data?.Bids.FirstOrDefault()?.Price} {x.Data?.Bids.FirstOrDefault()?.Amount ?? 0} {x.Data?.Bids.FirstOrDefault()?.Side}");
+                
+                var unSubOrderBookDetail = new UnsubscribeRequest("btcusd", Channel.OrderBookDetail);
+                client.Send(unSubOrderBookDetail).Wait();
             });
 
-            client.Streams.OrderBookFullStream.Subscribe(x =>
+            client.Streams.OrderBookDiffStream.Subscribe(x =>
             {
-                Log.Information($"Order book full");
-                Log.Information($"{x.Symbol} {x.Data?.Channel} {x.Data?.Asks.FirstOrDefault()?.Price} {x.Data?.Asks.FirstOrDefault()?.Amount ?? 0} {x.Data?.Asks.FirstOrDefault()?.Side}");
-                Log.Information($"{x.Symbol} {x.Data?.Channel} {x.Data?.Bids.FirstOrDefault()?.Price} {x.Data?.Bids.FirstOrDefault()?.Amount ?? 0} {x.Data?.Bids.FirstOrDefault()?.Side}");
+                Log.Information($"Order book diff");
+                Log.Information($"{x.Symbol} {x.Channel} {x.Data?.Asks.FirstOrDefault()?.Price} {x.Data?.Asks.FirstOrDefault()?.Amount ?? 0} {x.Data?.Asks.FirstOrDefault()?.Side}");
+                Log.Information($"{x.Symbol} {x.Channel} {x.Data?.Bids.FirstOrDefault()?.Price} {x.Data?.Bids.FirstOrDefault()?.Amount ?? 0} {x.Data?.Bids.FirstOrDefault()?.Side}");
             });
 
             

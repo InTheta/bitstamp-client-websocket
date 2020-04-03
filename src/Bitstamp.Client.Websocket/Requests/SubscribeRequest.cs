@@ -40,6 +40,8 @@ namespace Bitstamp.Client.Websocket.Requests
         {
             switch (Channel)
             {
+                case Channel.Heartbeat:
+                    return "heartbeat";
                 case Channel.Ticker:
                     return "live_trades";
                 case Channel.Orders:
@@ -48,7 +50,7 @@ namespace Bitstamp.Client.Websocket.Requests
                     return "order_book";
                 case Channel.OrderBookDetail:
                     return "detail_order_book";
-                case Channel.OrderBookFull:
+                case Channel.OrderBookDiff:
                     return "diff_order_book";
             }
 
