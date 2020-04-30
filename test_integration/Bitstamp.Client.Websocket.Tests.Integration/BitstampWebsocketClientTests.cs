@@ -16,7 +16,7 @@ namespace Bitstamp.Client.Websocket.Tests.Integration
         private static readonly string API_SECRET = "";
 
         [Fact]
-        public async Task Heartbeat()
+        public async Task ConnectTest()
         {
             var url = BitstampValues.ApiWebsocketUrl;
             using (var communicator = new BitstampWebsocketCommunicator(url))
@@ -34,9 +34,9 @@ namespace Bitstamp.Client.Websocket.Tests.Integration
 
                     await communicator.Start();
 
-                    await client.Send(new SubscribeRequest("btcusd", Channel.Heartbeat));
+                    client.Send(new SubscribeRequest("btcusd", Channel.Heartbeat));
 
-                    receivedEvent.WaitOne(TimeSpan.FromSeconds(30));
+                    receivedEvent.WaitOne(TimeSpan.FromSeconds(90));
 
                     Assert.NotNull(received);
                 }
